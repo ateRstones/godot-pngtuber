@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx5m6xbbtiftl"]
+
+[ext_resource type="PackedScene" uid="uid://c0s2ikb8jylyr" path="res://png_tuber.tscn" id="1_8657p"]
+
+[node name="MainScene" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -84.0
+offset_top = -44.0
+offset_right = 861.0
+offset_bottom = 1052.0
+color = Color(0, 1, 0, 1)
+
+[node name="PngTuber" parent="." instance=ExtResource("1_8657p")]
+position = Vector2(396, 588)
+scale = Vector2(0.434028, 0.434028)

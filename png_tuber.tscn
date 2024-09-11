@@ -1,0 +1,83 @@
+[gd_scene load_steps=10 format=3 uid="uid://c0s2ikb8jylyr"]
+
+[ext_resource type="Texture2D" uid="uid://cilq6o3pjfekf" path="res://assets/aterrstones-default.png" id="1_67jte"]
+[ext_resource type="Script" path="res://png_tuber.gd" id="1_l75pc"]
+[ext_resource type="Texture2D" uid="uid://0gawxi452uju" path="res://assets/aterrstones-eyesclosed.png" id="2_ncbx4"]
+[ext_resource type="Texture2D" uid="uid://daccc6meaqx0s" path="res://assets/aterrstones-talking.png" id="3_i5qbo"]
+[ext_resource type="Texture2D" uid="uid://dl0pxj8yklfn6" path="res://assets/aterrstones-talkingeyesclosed.png" id="4_05hjr"]
+[ext_resource type="Texture2D" uid="uid://crr425ia4d7ta" path="res://assets/aterrstones-talkingloud.png" id="5_j6mkc"]
+[ext_resource type="Texture2D" uid="uid://clea4g7auhmdb" path="res://assets/aterrstones-talkingloudeyesclosed.png" id="6_6pfye"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vfye2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_67jte")
+}],
+"loop": true,
+"name": &"pngtuber",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ncbx4")
+}],
+"loop": true,
+"name": &"pngtuber_blinking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_i5qbo")
+}],
+"loop": true,
+"name": &"pngtuber_talking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_05hjr")
+}],
+"loop": true,
+"name": &"pngtuber_talking_blinking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_j6mkc")
+}],
+"loop": true,
+"name": &"pngtuber_talkingloud",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_6pfye")
+}],
+"loop": true,
+"name": &"pngtuber_talkingloud_blinking",
+"speed": 5.0
+}]
+
+[sub_resource type="AudioStreamMicrophone" id="AudioStreamMicrophone_jnwli"]
+
+[node name="PngTuber" type="AnimatedSprite2D"]
+position = Vector2(196, 433)
+scale = Vector2(0.206944, 0.206944)
+sprite_frames = SubResource("SpriteFrames_vfye2")
+animation = &"pngtuber"
+script = ExtResource("1_l75pc")
+
+[node name="AudioStreamPlayer (recording)" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamMicrophone_jnwli")
+autoplay = true
+bus = &"Record"
+
+[node name="TimerBlinkTimeOut" type="Timer" parent="."]
+autostart = true
+
+[node name="TimerBlink" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="TimerBlinkTimeOut" to="." method="blink_timeout_timer_done"]
+[connection signal="timeout" from="TimerBlink" to="." method="blink_timer_done"]
